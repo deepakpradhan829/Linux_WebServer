@@ -6,4 +6,67 @@ addition to the directory /etc/httpd/conf.modules.d/, which contains
 configuration files necessary to load modules.
 
 Files are processed in alphabetical order.
+# Linux Web Server Setup with Apache HTTPD
+
+This repository contains Apache HTTPD configuration files used to set up a custom web server with the domain **deepakwebserver**.
+
+## Overview
+
+These files are from the `/etc/httpd/conf.d/` directory of a CentOS/RHEL-based Linux server running Apache HTTPD. The main custom config file is `deepak_webserver.com.conf` which sets up the virtual host for the domain `deepakwebserver`.
+
+
+## Step-by-step Setup Guide
+
+### 1. Install Apache HTTPD (if not installed)
+
+sudo dnf install httpd -y       # For CentOS/RHEL 8 or 9
+# or
+sudo yum install httpd -y       # For CentOS/RHEL 7
+
+### 2. Copy configuration files
+Copy the config files from this repository into the Apache config directory:
+
+sudo cp *.conf /etc/httpd/conf.d/
+
+### 3. Configure your domain in the config file
+The file `deepak_webserver.com.conf` contains the Apache virtual host configuration for your domain `deepakwebserver`.
+Make sure the domain points to your server’s IP in your DNS settings or `/etc/hosts` for testing.
+
+### 4. Start and enable Apache HTTPD service
+
+sudo systemctl start httpd
+sudo systemctl enable httpd
+
+
+### 5. Verify the server and domain
+
+Open your browser and navigate to:
+http://deepakwebserver
+
+
+You should see your custom web page served by Apache.
+
+
+## Additional Notes
+
+* To apply any changes to config files, restart Apache:
+sudo systemctl restart httpd
+
+* If you use a firewall, allow HTTP traffic:
+sudo firewall-cmd --add-service=http --permanent
+sudo firewall-cmd --reload
+
+## Troubleshooting
+
+* Check Apache status:
+sudo systemctl status httpd
+
+* View Apache error logs:
+sudo tail -f /var/log/httpd/error_log
+
+## Contact
+
+For questions or issues, contact Deepak G L.
+
+*This README explains how to use the configuration files in this repo to set up a basic Apache HTTP web server with a custom domain.*
 
